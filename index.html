@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokédex Roxa</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👾</text></svg>">
+</head>
+<body>
+    <header role="banner" class="site-header">
+        <div class="container">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 2a10 10 0 1 0 10 10H12V2z'%3E%3C/path%3E%3Ccircle cx='12' cy='12' r='3'%3E%3C/circle%3E%3C/svg%3E" alt="Pokébola Ícone" class="logo-icon">
+            <h1>Pokédex</h1>
+        </div>
+    </header>
+
+    <main role="main" class="site-main">
+        <div class="container">
+            <section class="pokemon-search" aria-labelledby="searchSectionLabel">
+                <h2 id="searchSectionLabel" class="visually-hidden">Buscar Pokémon</h2>
+                <input type="search" id="searchInput" placeholder="Buscar Pokémon por nome ou ID" aria-label="Campo de busca por Pokémon">
+                <button id="searchButton" class="button button--primary">Buscar</button>
+            </section>
+
+            <section id="pokedexDisplay" class="pokedex-display" aria-live="polite">
+                </section>
+
+            <nav class="pagination" role="navigation" aria-label="Paginação de Pokémon">
+                <button id="prevButton" class="button button--secondary" disabled>Anterior</button>
+                <span id="pageInfo" class="pagination__info" aria-live="polite">Página 1</span>
+                <button id="nextButton" class="button button--secondary">Próxima</button>
+            </nav>
+        </div>
+    </main>
+
+    <footer role="contentinfo" class="site-footer">
+        <div class="container">
+            <p>&copy; <span id="currentYear"></span> Pokédex - Desafio DIO. Feito por Luan de Paz.</p>
+        </div>
+    </footer>
+
+    <script src="./assets/js/main.js"></script>
+</body>
+</html>

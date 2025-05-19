@@ -1,0 +1,354 @@
+/* ------------------------- */
+/* --- RESET E GLOBAIS --- */
+/* ------------------------- */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    /* Tema Roxo */
+    --primary-color: #6A0DAD; /* Roxo Principal */
+    --primary-color-dark: #4A0072;
+    --primary-color-light: #9B59B6; /* Roxo Ametista */
+    --accent-color: #C39BD3; /* Lilás */
+
+    /* Cores Neutras */
+    --background-color: #f0e6f6; /* Fundo levemente roxo/cinza */
+    --surface-color: #ffffff;
+    --on-surface-color: #333333;
+    --on-primary-color: #ffffff;
+    --border-color: #d1b3e6;
+
+    /* Tipografia */
+    --font-family-main: 'Poppins', 'Arial', sans-serif;
+    --font-size-base: 16px;
+    --line-height-base: 1.6;
+
+    /* Espaçamentos */
+    --spacing-unit: 8px;
+    --spacing-xs: var(--spacing-unit);      /* 8px */
+    --spacing-sm: calc(var(--spacing-unit) * 2); /* 16px */
+    --spacing-md: calc(var(--spacing-unit) * 3); /* 24px */
+    --spacing-lg: calc(var(--spacing-unit) * 4); /* 32px */
+    --spacing-xl: calc(var(--spacing-unit) * 6); /* 48px */
+
+    /* Bordas */
+    --border-radius-sm: 4px;
+    --border-radius-md: 8px;
+
+    /* Sombras */
+    --box-shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+    --box-shadow-md: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+body {
+    font-family: var(--font-family-main);
+    line-height: var(--line-height-base);
+    background-color: var(--background-color);
+    color: var(--on-surface-color);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-size: var(--font-size-base);
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--spacing-sm);
+    padding-right: var(--spacing-sm);
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+.visually-hidden { /* Para esconder texto, mas manter para leitores de tela */
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* ------------------------- */
+/* ------- COMPONENTES ------- */
+/* ------------------------- */
+
+/* --- Cabeçalho --- */
+.site-header {
+    background-color: var(--primary-color);
+    color: var(--on-primary-color);
+    padding: var(--spacing-sm) 0;
+    text-align: center;
+    box-shadow: var(--box-shadow-sm);
+}
+.site-header .container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-xs);
+}
+.site-header h1 {
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+.logo-icon {
+    width: 32px;
+    height: 32px;
+}
+
+
+/* --- Botões --- */
+.button {
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border: none;
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 600;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+}
+.button:hover:not(:disabled) {
+    transform: translateY(-2px);
+}
+.button:active:not(:disabled) {
+    transform: translateY(0);
+}
+.button--primary {
+    background-color: var(--primary-color);
+    color: var(--on-primary-color);
+}
+.button--primary:hover:not(:disabled) {
+    background-color: var(--primary-color-dark);
+}
+.button--secondary {
+    background-color: var(--accent-color);
+    color: var(--primary-color-dark);
+}
+.button--secondary:hover:not(:disabled) {
+    background-color: var(--primary-color-light);
+    color: var(--on-primary-color);
+}
+.button:disabled {
+    background-color: #ccc;
+    color: #777;
+    cursor: not-allowed;
+}
+
+/* --- Seção de Busca --- */
+.pokemon-search {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    margin: var(--spacing-lg) 0;
+}
+
+.pokemon-search input[type="search"] {
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-sm);
+    font-size: 1rem;
+    min-width: 280px;
+    flex-grow: 1;
+    max-width: 450px;
+}
+.pokemon-search input[type="search"]:focus {
+    outline: 2px solid var(--primary-color-light);
+    border-color: var(--primary-color-light);
+}
+
+/* --- Display da Pokédex --- */
+.pokedex-display {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+}
+
+.pokemon-card {
+    background-color: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-md);
+    padding: var(--spacing-md);
+    text-align: center;
+    box-shadow: var(--box-shadow-md);
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    cursor: pointer; /* Indica que é clicável */
+}
+.pokemon-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(106, 13, 173, 0.2); /* Sombra roxa */
+}
+
+.pokemon-card__image-container {
+    background-color: var(--background-color);
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    margin: 0 auto var(--spacing-sm) auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border: 3px solid var(--accent-color);
+}
+.pokemon-card__image {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+}
+
+.pokemon-card__id {
+    font-size: 0.9rem;
+    color: var(--primary-color-light);
+    margin-bottom: var(--spacing-xs);
+    font-weight: 600;
+}
+
+.pokemon-card__name {
+    margin: 0.5rem 0;
+    text-transform: capitalize;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--primary-color-dark);
+}
+
+.pokemon-card__types {
+    margin-top: var(--spacing-sm);
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-xs);
+    flex-wrap: wrap;
+}
+.pokemon-card__type {
+    display: inline-block;
+    padding: calc(var(--spacing-xs) / 2) var(--spacing-sm);
+    border-radius: 15px; /* Pílula */
+    color: white;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Cores dos tipos (mantendo as originais para contraste e identificação) */
+.type--grass { background-color: #78C850; }
+.type--fire { background-color: #F08030; }
+.type--water { background-color: #6890F0; }
+.type--bug { background-color: #A8B820; }
+.type--normal { background-color: #A8A878; }
+.type--poison { background-color: #A040A0; } /* Roxo, combina com o tema */
+.type--electric { background-color: #F8D030; }
+.type--ground { background-color: #E0C068; }
+.type--fairy { background-color: #EE99AC; }
+.type--fighting { background-color: #C03028; }
+.type--psychic { background-color: #F85888; }
+.type--rock { background-color: #B8A038; }
+.type--ghost { background-color: #705898; } /* Roxo, combina com o tema */
+.type--ice { background-color: #98D8D8; }
+.type--dragon { background-color: #7038F8; } /* Roxo, combina com o tema */
+.type--dark { background-color: #705848; }
+.type--steel { background-color: #B8B8D0; }
+.type--flying { background-color: #A890F0; } /* Roxo, combina com o tema */
+
+/* --- Paginação --- */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: var(--spacing-lg);
+    gap: var(--spacing-sm);
+}
+.pagination__info {
+    font-weight: 600;
+    color: var(--primary-color-dark);
+}
+
+/* --- Mensagens de Feedback --- */
+.feedback-message {
+    text-align: center;
+    font-size: 1.1rem;
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius-sm);
+    margin: var(--spacing-md) 0;
+}
+.feedback-message--error {
+    background-color: #ffdddd;
+    color: #d8000c;
+    border: 1px solid #d8000c;
+}
+.feedback-message--loading {
+    color: var(--primary-color-dark);
+}
+
+/* --- Rodapé --- */
+.site-footer {
+    text-align: center;
+    padding: var(--spacing-md) 0;
+    background-color: var(--primary-color-dark);
+    color: var(--background-color); /* Texto mais claro no fundo escuro */
+    margin-top: auto; /* Empurra para o final da página */
+    font-size: 0.9rem;
+}
+
+/* ------------------------- */
+/* ----- MEDIA QUERIES ----- */
+/* ------------------------- */
+@media (max-width: 768px) {
+    :root {
+        --font-size-base: 15px;
+    }
+    .site-header h1 {
+        font-size: 1.5rem;
+    }
+    .pokemon-card__name {
+        font-size: 1.3rem;
+    }
+    .pokedex-display {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: var(--spacing-sm);
+    }
+    .pokemon-search {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .pokemon-search input[type="search"],
+    .pokemon-search button {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .pokedex-display {
+        grid-template-columns: 1fr; /* Uma coluna em telas muito pequenas */
+    }
+    .pokemon-card__image-container {
+        width: 100px;
+        height: 100px;
+    }
+    .pagination {
+        flex-direction: column;
+        gap: var(--spacing-xs);
+    }
+    .pagination button {
+        width: 80%;
+    }
+}
